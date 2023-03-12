@@ -26,7 +26,7 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
         - String_lib's **strlib_concat** is an improved version of string.h's *strconcat* as it can concatenate
         multiple strings, instead of only two.
 
-- **Letter Case**
+- **Letter Case Manipulation**
     - ```C
         void strlib_capitalize(char *_Dest, const char *_Source)
         ```
