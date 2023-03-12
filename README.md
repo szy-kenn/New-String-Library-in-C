@@ -74,13 +74,26 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
         ```
         - Checks if the string is ending with the *_CompareChar*
 
-- **Character Search**
+- **Comparisons**
+    - ```C
+        int strlib_equals(const char *_FirstString, const char *_SecondString)
+        ```
+        - Checks if the two passed strings are equal
+
+    - ```C
+        int strlib_equalsignorecase(const char *_FirstString, const char *_SecondString)
+        ```
+        - Checks if the two passed strings are equal (ignoring the case)
+
+- **Char Functions**
     - ```C
         int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase)
         ```
         - Counts all the present *_CompareChar* in the *_Source* variable, 
         Ignore case is also added in the parameter to choose between 0 (do not ignore case)
         and 1 (ignore case) when checking
+
+    
 
 **Todo:**
 

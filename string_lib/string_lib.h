@@ -265,25 +265,80 @@ void strlib_swapcase(char *_Dest, char *_Source) {
     _Dest[pos] = '\0';
 }
 
-int strlib_startswith(const char *_Source, int _CompareChar) {
+int strlib_startswith(const char *_Source, int _CmpChar) {
 
-    if ((int)_Source[0] == _CompareChar) {
+    if ((int)_Source[0] == _CmpChar) {
         return 0;
     }
 
     return -1;
 }
 
-int strlib_endswith(const char *_Source, int _CompareChar) {
+int strlib_endswith(const char *_Source, int _CmpChar) {
 
-    if ((int)_Source[strlib_len(_Source) - 1] == _CompareChar) {
+    if ((int)_Source[strlib_len(_Source) - 1] == _CmpChar) {
         return 0;
     }
 
     return -1;
 }
 
-int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase) {
+int strlib_equals(const char *_FirstString, const char *_SecondString) {
+    
+    /*
+        Compares each character of the two passsed strings,
+        Returns 0 if true, else returns a non-zero
+    */
+
+    const int srcSize = strlib_len(_FirstString);
+    const int cmpSize = strlib_len(_SecondString);
+
+    int diff = 0;
+
+    if (srcSize != cmpSize) {
+        return -1;
+    }
+
+    for (int i = 0; i < srcSize; i++) {
+
+        diff = (int)_FirstString[i] - (int)_SecondString[i];
+
+        if (diff != 0) {
+            return diff;
+        }
+    }
+
+    return diff;
+}
+
+int strlib_equalsignorecase(const char *_FirstString, const char *_SecondString) {
+    /*
+        Compares each character of the two passsed strings ignoring the case,
+        Returns 0 if true, else returns a non-zero
+    */
+
+    const int srcSize = strlib_len(_FirstString);
+    const int cmpSize = strlib_len(_SecondString);
+
+    int diff = 0;
+
+    if (srcSize != cmpSize) {
+        return -1;
+    }
+
+    for (int i = 0; i < srcSize; i++) {
+
+        diff = (int)_lower(_FirstString[i]) - (int)_lower(_SecondString[i]);
+
+        if (diff != 0) {
+            return diff;
+        }
+    }
+
+    return diff;   
+}
+
+int strlib_countchar(const char *_Source, int _CmpChar, int _IgnoreCase) {
     
     if (_IgnoreCase != 0 && _IgnoreCase != 1) {
         return -1;  // error
@@ -295,12 +350,12 @@ int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase) {
     while (*tmp != '\0') {
         
         if (_IgnoreCase == 0) {
-            if ((int)*tmp == _CompareChar) {
+            if ((int)*tmp == _CmpChar) {
                 count++;
             }
 
         } else {
-            if ((int)_lower(*tmp) == (int)_lower(_CompareChar)) {
+            if ((int)_lower(*tmp) == (int)_lower(_CmpChar)) {
                 count++;
             }
         }
@@ -308,6 +363,19 @@ int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase) {
         tmp++;
     }
     return count;
+
+}
+
+int strlib_countstr(const char *_Source, const char *_CompareStr, int _IgnoreCase) {
+
+    const char *tmpSrc = _Source;
+    const char *tmpCmp = _CompareStr;
+
+    const int srcSize = strlib_len(tmpSrc); 
+    const int cmpSize = strlib_len(tmpCmp);
+
+    //TODO: create substring functions and equals first
+    return 0;
 
 }
 

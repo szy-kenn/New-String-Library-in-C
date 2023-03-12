@@ -6,12 +6,12 @@
 
 int main () {
 
-    char *str1 = "hHh123";
-    
-    char str2[BUFFERSIZE];
-    strlib_swapcase(str2, str1);
+    char *str1 = "john";
+    char *str3 = "JOHN";
 
-    int ret = strlib_countchar(str1, 'H', 1);
+    char str2[BUFFERSIZE];
+
+    int ret = strlib_equalsignorecase(str1, str3);
 
     printf("%d", ret);
 
