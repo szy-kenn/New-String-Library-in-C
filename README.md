@@ -76,6 +76,17 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 
 **Todo:**
 
+- [x] copy
+- [x] len
+- [x] concat
+- [x] capitalize
+- [x] touppercase
+- [x] tolowercase
+- [x] swapcase
+- [x] ntouppercase
+- [x] ntolowercase
+- [x] startswith
+- [x] endswith
 - [ ] replace
 - [ ] tochararray
 - [ ] compare
