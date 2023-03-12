@@ -10,7 +10,10 @@ Todo:
 - replace
 - tochararray
 - compare, equals, matches (regex)
-- capitalize ✅, upper, lower, swapcase
+- capitalize ✅
+- touppercase ✅, ntouppercase ✅
+- tolowercase ✅, ntolowercase ✅
+- swapcase
 - isalpha, isdigit, isspace
 - isupper, islower
 - find, index, count, contains
