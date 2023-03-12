@@ -1,17 +1,12 @@
 #ifndef string_lib      // include guards to prevent duplicate definitions
 #define string_lib
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <ctype.h>
 
-// available functions
-size_t strlength(char *_Source);
-
-char* strcopy(char *_Source);
-
-char* concat(char *_firstString, char *_secondString);
-
-size_t strlength(char *_Source) {
+size_t strlib_len(char *_Source) {
 
     /**
      * Returns the size of a string from a character pointer excluding the null character,
@@ -34,8 +29,7 @@ size_t strlength(char *_Source) {
     return (size_t) (temp - initialMemoryLocation) + 1;
 }
 
-char* strcopy(char *_Source) {
-
+void strlib_copy(char *_Dest, const char *_Source) {
     /**
      * 
      * iterate through the passed char pointer and copy the character to the result variable 
@@ -43,46 +37,74 @@ char* strcopy(char *_Source) {
      * including the null terminator.
      * 
      */
-    
-    char *temp = _Source;
 
-    char *result = malloc(sizeof(char) * strlength(_Source) + 1);
+    const char *tmp = _Source;
 
     int pos = 0;
 
-    while (*temp != '\0') {
-        
-        result[pos] = *temp;
+    while (*tmp != '\0') {
+        _Dest[pos] = *tmp;
         pos++;
-        temp++;
+        tmp++;
     }
 
-    result[pos] = '\0';
-    return result;
+    _Dest[pos] = '\0';
 }
 
-char* concat(char *_firstString, char *_secondString) {
+void strlib_concat(char *_Dest, char **_arrStrings, size_t _arrSize) {
 
-    char *result = malloc(sizeof(char) * (strlength(_firstString) + strlength(_secondString)) + 1);
+    int res_pos = 0;
 
-    int res_position = 0, temp_position = 0;
-
-    char *temp[] = {_firstString, _secondString};
-
-    for (int i = 0; i < 2; i++) {
-
-        while (temp[i][temp_position] != '\0') {
-            result[res_position] = temp[i][temp_position];
-            res_position++;
-            temp_position++;
+    for (int i = 0; i < _arrSize; i++) {
+        
+        int arr_pos = 0;
+        char c = _arrStrings[i][arr_pos];
+        while (c != '\0') {
+            _Dest[res_pos] = c;
+            res_pos++;
+            arr_pos++;
+            c = _arrStrings[i][arr_pos];
         }
 
-        temp_position = 0;
     }
 
-    result[res_position] = '\0';
+    _Dest[res_pos] = '\0';
+}
 
-    return result;
+void strlib_capitalize(char *_Dest, char *_Source) {
+
+    int pos = 0;
+
+    char *tmp = _Source;
+
+    while (*tmp != '\0') {
+        if (pos == 0) { 
+            if ((int)*tmp <= 122 && (int)*tmp >= 97) {
+                
+                /*
+                    if in the first character of the string, 
+                    check if the ASCII value of the character is in range of
+                    the values of lowercase characters (97 - 122),
+                */
+
+               // if true, then subtract by 32 (its corresponding uppercase character),
+                _Dest[pos] = (char)((int)(*tmp - 32));      
+
+            } else {   
+                // else, just copy the character.                         
+                _Dest[pos] = *tmp;      
+            }
+
+        } else {
+            _Dest[pos] = *tmp;
+        }
+
+        pos++;
+        tmp++;
+    }
+
+    _Dest[pos] = '\0';
+
 }
 
 #endif
