@@ -63,10 +63,10 @@ int strlib_ntolowercase(char *_Dest, const char *_Source, int _Range)
 - Converts the first *_Range* characters of the source string variable to lowercase
 
 
-```C
-int strlib_startswith(const char *_Source, const char _CompareChar)
-```
-- Checks if the string is starting with the *_CompareChar*
+- ```C
+    int strlib_startswith(const char *_Source, const char _CompareChar)
+    ```
+    - Checks if the string is starting with the *_CompareChar*
 
 
 ```C
