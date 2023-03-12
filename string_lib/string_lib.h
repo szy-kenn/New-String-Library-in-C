@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <ctype.h>
 
 size_t strlib_len(const char *_Source);
 void strlib_copy(char *_Dest, const char *_Source);
@@ -14,23 +13,23 @@ void strlib_touppercase(char *_Dest, const char *_Source);
 int strlib_ntouppercase(char *_Dest, const char *_Source, int _Range);
 
 
-char _isupper(const char c) {
-    if (((int) c <= 90 && (int) c >= 65)) {
+int _isupper(int c) {
+    if (c <= 90 && c >= 65) {
         return 0;
     }
 
     return -1;
 }
 
-char _islower(const char c) {
-    if ((int) c <= 122 && (int) c >= 97) {
+int _islower(int c) {
+    if (c <= 122 && c >= 97) {
         return 0;
     }
 
     return -1;
 }
 
-char _upper(const char c) {
+char _upper(int c) {
 
     if (_islower(c) == 0) {
         /*
@@ -38,21 +37,21 @@ char _upper(const char c) {
             check if the ASCII value of the character is in range of
             the values of lowercase characters (97 - 122),
         */
-        return (char) ((int)c - 32);
+        return (char) (c - 32);
 
     } else 
         return c;
 }
 
-char _lower(const char c) {
+char _lower(int c) {
 
     if (_isupper(c) == 0) {
-        return (char) ((int)c + 32);
+        return (char) (c + 32);
     } else 
         return c;
 }
 
-char _swapcase(const char c) {
+char _swapcase(int c) {
 
     if (_isupper(c) == 0) {
         return _lower(c);
@@ -266,23 +265,51 @@ void strlib_swapcase(char *_Dest, char *_Source) {
     _Dest[pos] = '\0';
 }
 
-int strlib_startswith(const char *_Source, const char _CompareChar) {
+int strlib_startswith(const char *_Source, int _CompareChar) {
 
-    if ((int)_Source[0] == (int)_CompareChar) {
+    if ((int)_Source[0] == _CompareChar) {
         return 0;
     }
 
     return -1;
 }
 
-int strlib_endswith(const char *_Source, const char _CompareChar) {
+int strlib_endswith(const char *_Source, int _CompareChar) {
 
-    printf("%d", strlib_len(_Source));
-    if ((int)_Source[strlib_len(_Source) - 1] == (int)_CompareChar) {
+    if ((int)_Source[strlib_len(_Source) - 1] == _CompareChar) {
         return 0;
     }
 
     return -1;
 }
+
+int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase) {
+    
+    if (_IgnoreCase != 0 && _IgnoreCase != 1) {
+        return -1;  // error
+    }
+
+    int count = 0;
+    const char *tmp = _Source;
+
+    while (*tmp != '\0') {
+        
+        if (_IgnoreCase == 0) {
+            if ((int)*tmp == _CompareChar) {
+                count++;
+            }
+
+        } else {
+            if ((int)_lower(*tmp) == (int)_lower(_CompareChar)) {
+                count++;
+            }
+        }
+
+        tmp++;
+    }
+    return count;
+
+}
+
 
 #endif

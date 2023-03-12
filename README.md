@@ -64,15 +64,23 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 
 
     - ```C
-        int strlib_startswith(const char *_Source, const char _CompareChar)
+        int strlib_startswith(const char *_Source, int _CompareChar)
         ```
         - Checks if the string is starting with the *_CompareChar*
 
 
     - ```C
-        int strlib_endswith(const char *_Source, const char _CompareChar)
+        int strlib_endswith(const char *_Source, int _CompareChar)
         ```
         - Checks if the string is ending with the *_CompareChar*
+
+- **Character Search**
+    - ```C
+        int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase)
+        ```
+        - Counts all the present *_CompareChar* in the *_Source* variable, 
+        Ignore case is also added in the parameter to choose between 0 (do not ignore case)
+        and 1 (ignore case) when checking
 
 **Todo:**
 
@@ -87,8 +95,8 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 - [x] ntolowercase
 - [x] startswith
 - [x] endswith
+- [x] countchar
 - [ ] replace
-- [ ] tochararray
 - [ ] compare
 - [ ] equals
 - [ ] matches (regex)
@@ -99,7 +107,6 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 - [ ] islower
 - [ ] find
 - [ ] index
-- [ ] count
 - [ ] contains
 - [ ] split
 - [ ] trim

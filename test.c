@@ -3,18 +3,17 @@
 #include "string_lib/string_lib.h"
 
 #define BUFFERSIZE 100
+
 int main () {
 
-    char *str1 = "hElloSqwkd";
+    char *str1 = "hHh123";
     
     char str2[BUFFERSIZE];
-
     strlib_swapcase(str2, str1);
 
-    printf("%s\n", str2);
+    int ret = strlib_countchar(str1, 'H', 1);
 
-    printf("%d", strlib_startswith(str1, 'h'));
-    printf("\n%d", strlib_endswith(str1, 'd'));
+    printf("%d", ret);
 
     return 0;
 }
