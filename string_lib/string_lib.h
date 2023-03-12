@@ -13,6 +13,55 @@ void strlib_capitalize(char *_Dest, const char *_Source);
 void strlib_touppercase(char *_Dest, const char *_Source);
 int strlib_ntouppercase(char *_Dest, const char *_Source, int _Range);
 
+
+char _isupper(const char c) {
+    if (((int) c <= 90 && (int) c >= 65)) {
+        return 0;
+    }
+
+    return -1;
+}
+
+char _islower(const char c) {
+    if ((int) c <= 122 && (int) c >= 97) {
+        return 0;
+    }
+
+    return -1;
+}
+
+char _upper(const char c) {
+
+    if (_islower(c) == 0) {
+        /*
+            if in the first character of the string, 
+            check if the ASCII value of the character is in range of
+            the values of lowercase characters (97 - 122),
+        */
+        return (char) ((int)c - 32);
+
+    } else 
+        return c;
+}
+
+char _lower(const char c) {
+
+    if (_isupper(c) == 0) {
+        return (char) ((int)c + 32);
+    } else 
+        return c;
+}
+
+char _swapcase(const char c) {
+
+    if (_isupper(c) == 0) {
+        return _lower(c);
+    } else if (_islower(c) == 0) {
+        return _upper(c);
+    } else
+        return c;
+}
+
 size_t strlib_len(const char *_Source) {
 
     /**
@@ -33,7 +82,7 @@ size_t strlib_len(const char *_Source) {
         tmp++;
     }
 
-    return (size_t) (tmp - initialMemoryLocation) + 1;
+    return (size_t) (tmp - initialMemoryLocation);
 }
 
 void strlib_copy(char *_Dest, const char *_Source) {
@@ -78,37 +127,6 @@ void strlib_concat(char *_Dest, const char **_arrStrings, size_t _arrSize) {
     _Dest[res_pos] = '\0';
 }
 
-char _upper(const char c) {
-
-    if ((int) c <= 122 && (int) c >= 97) {
-        /*
-            if in the first character of the string, 
-            check if the ASCII value of the character is in range of
-            the values of lowercase characters (97 - 122),
-        */
-        return (char) ((int)c - 32);
-
-    } else 
-        return c;
-}
-
-char _lower(const char c) {
-
-    if ((int) c <= 90 && (int) c >= 65) {
-        return (char) ((int)c + 32);
-    } else 
-        return c;
-}
-
-char _swapcase(const char c) {
-
-    if ((int) c <= 90 && (int) c >= 65) {
-        return _lower(c);
-    } else if ((int) c <= 122 && (int) c >= 97) {
-        return _upper(c);
-    } else
-        return c;
-}
 
 void strlib_capitalize(char *_Dest, const char *_Source) {
 
@@ -246,6 +264,25 @@ void strlib_swapcase(char *_Dest, char *_Source) {
     }
 
     _Dest[pos] = '\0';
+}
+
+int strlib_startswith(const char *_Source, const char _CompareChar) {
+
+    if ((int)_Source[0] == (int)_CompareChar) {
+        return 0;
+    }
+
+    return -1;
+}
+
+int strlib_endswith(const char *_Source, const char _CompareChar) {
+
+    printf("%d", strlib_len(_Source));
+    if ((int)_Source[strlib_len(_Source) - 1] == (int)_CompareChar) {
+        return 0;
+    }
+
+    return -1;
 }
 
 #endif

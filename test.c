@@ -11,6 +11,10 @@ int main () {
 
     strlib_swapcase(str2, str1);
 
-    printf("%s", str2);
+    printf("%s\n", str2);
+
+    printf("%d", strlib_startswith(str1, 'h'));
+    printf("\n%d", strlib_endswith(str1, 'd'));
+
     return 0;
 }
