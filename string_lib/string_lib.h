@@ -100,6 +100,16 @@ char _lower(const char c) {
         return c;
 }
 
+char _swapcase(const char c) {
+
+    if ((int) c <= 90 && (int) c >= 65) {
+        return _lower(c);
+    } else if ((int) c <= 122 && (int) c >= 97) {
+        return _upper(c);
+    } else
+        return c;
+}
+
 void strlib_capitalize(char *_Dest, const char *_Source) {
 
     int pos = 0;
@@ -222,6 +232,20 @@ int strlib_ntolowercase(char *_Dest, const char *_Source, int _Range) {
     _Dest[pos] = '\0';
 
     return 0;
+}
+
+void strlib_swapcase(char *_Dest, char *_Source) {
+
+    char *tmp = _Source;
+    int pos = 0;
+
+    while (*tmp != '\0') {
+        _Dest[pos] = _swapcase(*tmp);
+        pos++;
+        tmp++;
+    }
+
+    _Dest[pos] = '\0';
 }
 
 #endif

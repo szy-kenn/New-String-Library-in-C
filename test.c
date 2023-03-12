@@ -5,11 +5,11 @@
 #define BUFFERSIZE 100
 int main () {
 
-    char *str1 = "HELLOW";
+    char *str1 = "hElloSqwkd";
     
     char str2[BUFFERSIZE];
 
-    strlib_ntolowercase(str2, str1, 5);
+    strlib_swapcase(str2, str1);
 
     printf("%s", str2);
     return 0;
