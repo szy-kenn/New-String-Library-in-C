@@ -13,7 +13,7 @@ Todo:
 - capitalize ✅
 - touppercase ✅, ntouppercase ✅
 - tolowercase ✅, ntolowercase ✅
-- swapcase
+- swapcase ✅
 - isalpha, isdigit, isspace
 - isupper, islower
 - find, index, count, contains
