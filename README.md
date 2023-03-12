@@ -11,17 +11,14 @@ and broader way to manipulate strings in C.
 ### Preexisting Functions:
 
 ```C
-void strlib_copy(char *_Dest, const char *_Source)
+void strlib_copy(char *_Dest, const char *_Source) // similar to string.h's strcpy
 ``` 
-(similar to string.h's _strcpy_)
+```C
+size_t strlib_len(const char *_Source) // similar to string.h's strlen
+``` 
+```C
+void strlib_concat(char *_Dest, const char **_arrStrings, size_t _arrSize) // similar to string.h's strcat
 ```
-- strlib_len
-```
-(similar to string.h's _strlen_)
-```
-- strlib_concat 
-```
-(similar to string.h's _strcat_)
 
 ### Additional Functions:
 ```
