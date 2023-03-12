@@ -6,7 +6,14 @@
 #include <stdint.h>
 #include <ctype.h>
 
-size_t strlib_len(char *_Source) {
+size_t strlib_len(const char *_Source);
+void strlib_copy(char *_Dest, const char *_Source);
+void strlib_concat(char *_Dest, const char **_arrStrings, size_t _arrSize);
+void strlib_capitalize(char *_Dest, const char *_Source);
+void strlib_touppercase(char *_Dest, const char *_Source);
+int strlib_ntouppercase(char *_Dest, const char *_Source, int _Range);
+
+size_t strlib_len(const char *_Source) {
 
     /**
      * Returns the size of a string from a character pointer excluding the null character,
@@ -18,15 +25,15 @@ size_t strlib_len(char *_Source) {
      * the temp's final and initial location.
     */
 
-    char *temp = _Source;
+    const char *tmp = _Source;
 
-    intptr_t initialMemoryLocation = (intptr_t)temp;
+    intptr_t initialMemoryLocation = (intptr_t)tmp;
 
-    while (*temp != '\0') { 
-        temp++;
+    while (*tmp != '\0') { 
+        tmp++;
     }
 
-    return (size_t) (temp - initialMemoryLocation) + 1;
+    return (size_t) (tmp - initialMemoryLocation) + 1;
 }
 
 void strlib_copy(char *_Dest, const char *_Source) {
@@ -51,7 +58,7 @@ void strlib_copy(char *_Dest, const char *_Source) {
     _Dest[pos] = '\0';
 }
 
-void strlib_concat(char *_Dest, char **_arrStrings, size_t _arrSize) {
+void strlib_concat(char *_Dest, const char **_arrStrings, size_t _arrSize) {
 
     int res_pos = 0;
 
@@ -71,30 +78,37 @@ void strlib_concat(char *_Dest, char **_arrStrings, size_t _arrSize) {
     _Dest[res_pos] = '\0';
 }
 
-void strlib_capitalize(char *_Dest, char *_Source) {
+char _upper(const char c) {
+
+    if ((int) c <= 122 && (int) c >= 97) {
+        /*
+            if in the first character of the string, 
+            check if the ASCII value of the character is in range of
+            the values of lowercase characters (97 - 122),
+        */
+        return (char) ((int)c - 32);
+
+    } else 
+        return c;
+}
+
+char _lower(const char c) {
+
+    if ((int) c <= 90 && (int) c >= 65) {
+        return (char) ((int)c + 32);
+    } else 
+        return c;
+}
+
+void strlib_capitalize(char *_Dest, const char *_Source) {
 
     int pos = 0;
 
-    char *tmp = _Source;
+    const char *tmp = _Source;
 
     while (*tmp != '\0') {
         if (pos == 0) { 
-            if ((int)*tmp <= 122 && (int)*tmp >= 97) {
-                
-                /*
-                    if in the first character of the string, 
-                    check if the ASCII value of the character is in range of
-                    the values of lowercase characters (97 - 122),
-                */
-
-               // if true, then subtract by 32 (its corresponding uppercase character),
-                _Dest[pos] = (char)((int)(*tmp - 32));      
-
-            } else {   
-                // else, just copy the character.                         
-                _Dest[pos] = *tmp;      
-            }
-
+            _Dest[pos] = _upper(*tmp);
         } else {
             _Dest[pos] = *tmp;
         }
@@ -105,6 +119,109 @@ void strlib_capitalize(char *_Dest, char *_Source) {
 
     _Dest[pos] = '\0';
 
+}
+
+void strlib_touppercase(char *_Dest, const char *_Source) {
+    /*
+        Converts all characters of _Source char array to uppercase
+    */
+
+   const char *tmp = _Source;
+
+   int pos = 0;
+
+   while (*tmp != '\0') {
+        _Dest[pos] = _upper(*tmp);
+        pos++;
+        tmp++;
+   } 
+
+   _Dest[pos] = '\0';
+
+}
+
+void strlib_tolowercase(char *_Dest, const char *_Source) {
+    /*
+        Converts all characters of _Source char array to lowercase
+    */
+
+   const char *tmp = _Source;
+
+   int pos = 0;
+
+   while (*tmp != '\0') {
+        _Dest[pos] = _lower(*tmp);
+        pos++;
+        tmp++;
+   } 
+
+   _Dest[pos] = '\0';  
+}
+
+int strlib_ntouppercase(char *_Dest, const char *_Source, int _Range) {
+
+    /*
+        Converts the first _Range characters of _Source char array to uppercase and
+        pass it to _Dest char array, including the remaining characters while maintaining 
+        its case
+    */
+
+    if (strlib_len(_Source) < _Range) {
+        return -1;  // error
+    }
+
+    const char *tmp = _Source;
+    int i = 0;
+
+    for (i = 0; i < _Range; i++) {
+        _Dest[i] = _upper(*tmp);
+        tmp++;
+    }
+
+    int pos = i;
+
+    while (*tmp != '\0') {        
+        _Dest[pos] = *tmp;
+        pos++;
+        tmp++;
+    }
+
+    _Dest[pos] = '\0';
+
+    return 0;
+}
+
+int strlib_ntolowercase(char *_Dest, const char *_Source, int _Range) {
+
+    /*
+        Converts the first _Range characters of _Source char array to lowercase and
+        pass it to _Dest char array, including the remaining characters while maintaining 
+        its case
+    */
+
+    if (strlib_len(_Source) < _Range) {
+        return -1;  // error
+    }
+
+    const char *tmp = _Source;
+    int i = 0;
+
+    for (i = 0; i < _Range; i++) {
+        _Dest[i] = _lower(*tmp);
+        tmp++;
+    }
+
+    int pos = i;
+
+    while (*tmp != '\0') {        
+        _Dest[pos] = *tmp;
+        pos++;
+        tmp++;
+    }
+
+    _Dest[pos] = '\0';
+
+    return 0;
 }
 
 #endif
