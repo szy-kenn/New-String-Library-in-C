@@ -11,7 +11,7 @@ and broader way to manipulate strings in C.
 ### Preexisting Functions:
 
 ```
-**void strlib_copy(char *_Dest, const char *_Source)**
+void strlib_copy(char *_Dest, const char *_Source)
 ``` 
 (similar to string.h's _strcpy_)
 ```
