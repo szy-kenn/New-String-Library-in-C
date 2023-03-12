@@ -17,5 +17,5 @@ Todo:
 - isalpha, isdigit, isspace
 - isupper, islower
 - find, index, count, contains
-- startswith, endswith
+- startswith ✅, endswith ✅
 - split, trim
