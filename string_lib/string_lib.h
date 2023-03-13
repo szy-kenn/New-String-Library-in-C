@@ -379,5 +379,44 @@ int strlib_countstr(const char *_Source, const char *_CompareStr, int _IgnoreCas
 
 }
 
+int strlib_index(const char *_Source, int c) {
+
+    const char *tmp = _Source;
+    intptr_t _initmempos = (intptr_t) tmp;
+
+    while (*tmp != '\0') {
+        if ((int) *tmp == c) {
+            return (int) (tmp - _initmempos);
+        }
+        tmp++;
+    }
+
+    return -1;  // none
+}
+
+int strlib_contains(const char *_Source, int c) {
+
+    if (strlib_index(_Source, c) == -1)
+        return -1;  // false
+    else
+        return 0;   // true
+}
+
+void strlib_replace(char _Source[], char _ChrRemove, char _ChrReplace) {
+    /*
+        _Source must be a character array, not a char pointer
+        c1 is the char to be replaced by c2
+    */
+   
+   char *tmp = _Source;
+   
+   int idx = strlib_index(tmp, _ChrRemove);
+   
+   while (idx != -1) {
+        tmp[idx] = _ChrReplace;
+        idx = strlib_index(tmp, _ChrRemove);
+   }
+
+}
 
 #endif

@@ -85,6 +85,16 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
         ```
         - Checks if the two passed strings are equal (ignoring the case)
 
+    - ```C
+        int strlib_index(const char *_Source, int c)
+        ```
+        - Returns the index of the char *c*, returns -1 if character is not found
+
+    - ```C
+        int strlib_contains(const char *_Source, int c)
+        ```
+        - Checks if the string contains the char *c*, returns 0 if found, else -1
+
 - **Char Functions**
     - ```C
         int strlib_countchar(const char *_Source, int _CompareChar, int _IgnoreCase)
@@ -93,7 +103,11 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
         Ignore case is also added in the parameter to choose between 0 (do not ignore case)
         and 1 (ignore case) when checking
 
-    
+    - ```C
+        void strlib_replace(char _Source[], char _ChrRemove, char _ChrReplace)
+        ```
+        - Replaces every char *_ChrRemove* with char *_ChrReplace*, *_Source* must be a char array, not a char pointer
+
 
 **Todo:**
 
@@ -109,9 +123,9 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 - [x] startswith
 - [x] endswith
 - [x] countchar
-- [ ] replace
+- [x] replace
 - [ ] compare
-- [ ] equals
+- [x] equals
 - [ ] matches (regex)
 - [ ] isalpha
 - [ ] isdigit
@@ -119,7 +133,7 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 - [ ] isupper
 - [ ] islower
 - [ ] find
-- [ ] index
-- [ ] contains
+- [x] index
+- [x] contains
 - [ ] split
 - [ ] trim

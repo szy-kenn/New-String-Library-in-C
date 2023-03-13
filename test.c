@@ -6,14 +6,14 @@
 
 int main () {
 
-    char *str1 = "john";
+    char str1[] = "john";
     char *str3 = "JOHN";
 
     char str2[BUFFERSIZE];
+    
+    strlib_replace(str1, 'o', 'l');
+    printf("%s", str1);
 
-    int ret = strlib_equalsignorecase(str1, str3);
-
-    printf("%d", ret);
 
     return 0;
 }
