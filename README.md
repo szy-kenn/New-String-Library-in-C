@@ -137,3 +137,4 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 - [x] contains
 - [ ] split
 - [ ] trim
+- [ ] ciphers, encryption, decryption
