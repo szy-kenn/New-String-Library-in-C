@@ -6,14 +6,15 @@
 
 int main () {
 
-    char str1[] = "john";
-    char *str3 = "JOHN";
+    char str1[] = "john#ken#haha#hehe";
+    char str3[10][BUFFERSIZE];
 
     char str2[BUFFERSIZE];
-    
-    strlib_replace(str1, 'o', 'l');
-    printf("%s", str1);
 
+    strlib_split(str3, str1, '#', 0);
+
+    printf("%s", str3[0]);
+    printf("\n%s", str3[1]);
 
     return 0;
 }

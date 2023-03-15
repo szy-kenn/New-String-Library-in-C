@@ -226,7 +226,7 @@ int strlib_ntolowercase(char *_Dest, const char *_Source, int _Range) {
         its case
     */
 
-    if (strlib_len(_Source) < _Range) {
+    if (strlib_len(_Source) <= _Range) {
         return -1;  // error
     }
 
@@ -416,6 +416,43 @@ void strlib_replace(char _Source[], char _ChrRemove, char _ChrReplace) {
         tmp[idx] = _ChrReplace;
         idx = strlib_index(tmp, _ChrRemove);
    }
+
+}
+
+void strlib_split(char _Dest[][100], const char *_Source, const char _Separator, int _nSplit) {
+
+    /*
+        - Destination must be a pointer to a char pointer, _nSplit stores how many splits should 
+        be done
+    */
+
+   size_t size = strlib_len(_Source);
+
+   char tmp[size];
+
+   strlib_copy(tmp, _Source);
+
+   int pos = 0, split = 0, split_pos = 0;
+
+   while (pos != size) {
+
+        if ((int)(tmp[pos]) != (int)_Separator) {
+            _Dest[split][split_pos] = tmp[pos];
+            split_pos++;
+            pos++;
+        } else {
+            if (split_pos > 0) {
+                _Dest[split][split_pos] = '\0';
+            }
+
+            split++;
+            pos++;
+            split_pos = 0;
+
+        }
+   }
+
+   _Dest[split][split_pos] = '\0';
 
 }
 
