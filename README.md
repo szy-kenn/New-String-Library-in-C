@@ -132,7 +132,6 @@ size_t strlib_len(const char *_Source) // similar to string.h's strlen
 - [ ] isspace
 - [ ] isupper
 - [ ] islower
-- [ ] find
 - [x] index
 - [x] contains
 - [x] split
